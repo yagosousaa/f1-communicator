@@ -1,0 +1,12 @@
+.cc-send {
+  background: var(--colorNeutralBackground5);
+  user-select: none;
+  min-height: 100vh;
+
+  padding-left: 7.5rem;
+  padding-top: 2.5rem;
+}
+
+.cc-send-title {
+  font-size: 1.25rem;
+}

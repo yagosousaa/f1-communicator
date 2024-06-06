@@ -10,7 +10,10 @@ import {
 import { HashRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import { useTeamsUserCredential } from "@microsoft/teamsfx-react";
 import { HomePage } from "./components/Home/homePage";
-import { app, Context } from "@microsoft/teams-js";
+import React from "react";
+import { SendMessages } from "./components/SendMessages/sendMessages";
+import { DraftMessages } from "./components/DraftMessages/draftMessages";
+import { ScheduledMessages } from "./components/ScheduledMessages/scheduledMessages";
 
 /**
  * The main app which handles the initialization and routing
@@ -18,22 +21,15 @@ import { app, Context } from "@microsoft/teams-js";
  */
 
 export default function App() {
+  const [fluentUITheme, setFluentUITheme] = React.useState(teamsDarkTheme);
+
   const { loading, themeString } = useTeamsUserCredential({
     clientId: process.env.REACT_APP_CLIENT_ID!,
     initiateLoginEndpoint: process.env.REACT_APP_START_LOGIN_PAGE_URL!,
   });
   return (
     <FluentProvider
-      theme={
-        themeString === "dark"
-          ? teamsDarkTheme
-          : themeString === "contrast"
-          ? teamsHighContrastTheme
-          : {
-              ...teamsLightTheme,
-              colorNeutralBackground3: "#eeeeee",
-            }
-      }
+      theme={fluentUITheme}
       style={{ background: tokens.colorNeutralBackground3 }}
     >
       <Router>
@@ -41,7 +37,19 @@ export default function App() {
           <Spinner style={{ margin: 100 }} />
         ) : (
           <Routes>
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/home" element={<HomePage theme={fluentUITheme} />} />
+            <Route
+              path="/sendMessages"
+              element={<SendMessages theme={fluentUITheme} />}
+            />
+            <Route
+              path="/draftMessages"
+              element={<DraftMessages theme={fluentUITheme} />}
+            />
+            <Route
+              path="/scheduledMessages"
+              element={<ScheduledMessages theme={fluentUITheme} />}
+            />
             <Route path="*" element={<Navigate to={"/home"} />} />
           </Routes>
         )}
