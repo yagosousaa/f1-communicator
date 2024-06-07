@@ -30,7 +30,7 @@ export default function App() {
   return (
     <FluentProvider
       theme={fluentUITheme}
-      style={{ background: tokens.colorNeutralBackground3 }}
+      style={{ background: tokens.colorNeutralBackground5 }}
     >
       <Router>
         {loading ? (

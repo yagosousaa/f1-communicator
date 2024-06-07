@@ -10,7 +10,7 @@ interface IHeaderProps {
 
 export const Header = (props: IHeaderProps) => {
   return (
-    <>
+    <div className="header-section">
       <div className={props.theme === teamsLightTheme ? "cc-header-light" : "cc-header"}>
         <div className="cc-main-left">
           <img srcSet={""} alt="Logo" className="cc-logo" title="Header" />
@@ -42,6 +42,7 @@ export const Header = (props: IHeaderProps) => {
           </NavLink>
         </nav>
       </div>
-    </>
+      <Divider className="divider" appearance="subtle" />
+    </div>
   );
 };
